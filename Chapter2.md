@@ -46,3 +46,152 @@ Khi ghi chép để biểu thị các Aggregate (kết tập), ta cần thể hi
 - Khác kết tập thì ta sẽ dùng kí hiệu `association` để trỏ đến object được tham chiếu
 
 **Lưu ý**: 2 kí hiệu `association`, `composition` đều là kí hiệu dùng trong UML. (Ref: https://github.com/tuananhhedspibk/TeckStack/issues/95)
+
+### DDD Amenia
+
+Đây là thuật ngữ nói về việc model hầu như không chứa bất kì business logic nào cả.
+
+### Sử dụng Onion Architecture
+
+Ở đây ta định nghĩa theo từng tầng (tầng nào sẽ dùng để triển khai class nào).
+
+![File_000](https://user-images.githubusercontent.com/15076665/173221933-fc1299f9-389c-4bdf-a5ac-6b76a6bbf58b.png)
+
+### DDD Amenia Code
+
+```TS
+class TaskEntity {
+  private id: number;
+  private status: TaskStatus;
+  private name: string;
+  private dueDate: Date;
+  private postponeCount: number;
+}
+// Ở đây giả sử mỗi property đều có các getter và setter tương ứng
+// VD: setStatus, getStatus, setName, getName, ...
+```
+
+Thoạt nhìn ta thấy class này khá OK, nhưng nếu nhìn vào use-case có sử dụng entity class này như dưới đây ta có thể thấy sẽ phát sinh một số vấn đề khác.
+
+```TS
+class TaskCreateUsecase {
+  execute(name: string, dueDate: Date) {
+    if (!name || !dueDate) {
+      throw new UsecaseError();
+    }
+
+    const task = new Task();
+    task.setStatus(TaskStatus.UNDONE);
+    task.setName(name);
+    task.setDueDate(dueDate);
+  }
+}
+```
+
+Mọi thứ vẫn rất OK, thế nhưng nếu có một class như sau:
+
+```TS
+class EvilTaskUsecase {
+  execute() {
+    task.setStatus(TaskStatus.DONE);
+    task.setName('');
+  }
+}
+```
+
+Thì sẽ phát sinh 2 vấn đề:
+
+**1. Dữ liệu bị ghi đè "không thương tiếc"**
+Nguyên nhân là do các setter đều là public method, nên từ các use-case khác ta vẫn có thể thay đổi dữ liệu của entity.
+
+**2. Việc truy vết, đọc code sẽ khó khăn**
+Giả sử nếu ta muốn giải quyết vấn đề xung đột dữ liệu nêu trên, ta cần phải truy vết việc tham chiếu đến các setter ở rất nhiều chỗ. Từ đó dẫn đến chi phí đọc code, bảo trì code sẽ tăng lên.
+
+Không những thế từ code để hiểu được model cũng sẽ rất khó nếu viết model như trên.
+
+### Nên viết domain knowledge ở tầng nào ?
+
+Như ví dụ trên ta thấy nếu viết domain knowledge ở tầng use-case sẽ phát sinh những vấn đề khá nghiêm trọng. Do đó thay vì viết ở tầng use-case như hình bên dưới
+
+![File_000 (2)](https://user-images.githubusercontent.com/15076665/173223414-d72665a7-dfd1-4a8b-b5e6-24ff442d6385.png)
+
+Hãy tập trung viết chúng vào tầng domain
+
+![File_000 (1)](https://user-images.githubusercontent.com/15076665/173223420-b03e5b24-5711-4d33-9810-68cc3542257e.png)
+
+Nếu viết domain knowledge vào tầng domain thì tầng use-case trông sẽ như thế này.
+
+```TS
+class TaskCreateUseCase {
+  private taskRepository: TaskRepository;
+
+  execute(name: string, dueDate: Date) {
+    const taskEntity = new TaskEntity(name, dueDate);
+    taskRepository.save(taskEntity);
+  }
+}
+```
+
+```TS
+class TaskPostponeUseCase {
+  private taskRepository: TaskRepository;
+
+  execute(id: number) {
+    const taskEntity = taskRepository.findById(id);
+    taskEntity.postpone();
+  }
+}
+```
+
+Lúc này code ở tầng use-case đã trở nên trừu tượng hơn rất nhiều. Bản thân nó đã:
+- `ẨN ĐI` cách thực thi (HOW)
+- `CHỈ BIỂU THỊ` làm cái gì (WHAT)
+
+Code của entity trong tầng domain sẽ trông như thế này.
+
+```TS
+class TaskEntity {
+  private id: number;
+  private taskStatus: TaskStatus;
+  private name: string;
+  private postponeCount: number;
+  private dueDate: Date;
+
+  constructor(name: string, dueDate: Date) {
+    this.name = name;
+    this.dueDate = dueDate;
+    this.taskStatus = TaskStatus.UNDONE;
+    this.postponeCount = 0;
+  }
+
+  postpone() {
+    // implementation
+  }
+}
+```
+
+Lúc này mọi public setter đều bị khai trừ, nên ta sẽ tránh được việc thiết lập các giá trị không mong muốn.
+
+### Nguyên tắc cơ bản khi thiết kế Object ở tầng Domain
+
+Có 2 nguyên tắc cơ bản sau:
+① Ghi mọi domain knowledge vào object
+② Chỉ cho phép những instances chuẩn chỉ được tồn tại
+
+Với nguyên tắc ②, bất cứ khi nào lưu dữ liệu vào DB, ta cũng cần xác thực xem dữ liệu của domain model object có bị xung đột hay không. Để thực hiện việc xác thực này ta có 2 cách sau:
+① Áp đặt điều kiện khi tạo instance
+② Áp đặt điều kiện chỉnh sửa
+
+Với ① ta sẽ tiến hành tạo instance thông qua `constructor` hoặc `factory method`, bằng cách này ta có thế áp đặt các điều kiện về mặt dữ liệu khi tạo instance từ đó tránh được tình trạng xung đột dữ liệu.
+Cần tránh tình trạng sử dụng `default constructor` (các constructor này thường không setup bất cứ giá trị gì cho các property) vì khi đó nó sẽ không đảm bảo được việc tránh xung đột dữ liệu cho instance.
+
+Với ② ta sẽ áp đặt các điều kiện về dữ liệu đối với các hàm chuyển trạng thái của entity instance. Khi đó ta có thể công khai các hàm này ra bên ngoài.
+Với các setter thì hoàn toàn ngược lại, chúng vi phạm quy tắc về tránh xung đột dữ liệu. Ở ví dụ trên đó là method `postpone`
+
+Việc tuân thủ 2 nguyên tắc trên đây sẽ giúp:
+- Tăng tính dễ đọc cho code
+- Tăng khả năng bảo trì cho code
+
+### Quản lí Ubiquitous Language như thế nào ?
+
+Ubiquitous được tạo ra trong quá trình tạo Sơ đồ Domain Model. Vậy nên thay vì định nghĩa chúng ở một văn bản riêng, hãy định nghĩa chung với sơ đồ domain model để dễ dàng cập nhật và bảo trì.
