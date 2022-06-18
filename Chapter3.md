@@ -66,3 +66,29 @@ Giả sử bạn đang build một hệ thống EC với sự tham gia của cá
 Bạn đang thiết kế model `Product`, thế nhưng có một vấn đề đó là mỗi team sẽ có cách hiểu về `Product` khác nhau
 
 ![File_000 (2)](https://user-images.githubusercontent.com/15076665/173850043-6c28cb7e-c14a-4e5a-a89b-b7142db1346a.png)
+
+> Do đó khi quy mô của project ngày một lớn thì sẽ rất khó để tạo được một model thống nhất cho toàn bộ hệ thống
+
+Như cuốn sách nổi tiếng của Evans về DDD có viết:
+
+> Việc tạo dựng một model thống nhất cho toàn bộ hệ thống là việc bất khả thi cũng như gây tốn kém nhiều chi phí.
+
+Do đó với DDD hãy **định nghĩa rõ ràng phạm vi áp dụng của model và trong từng phạm vi hãy dùng một model và một ngôn ngữ thống nhất**
+
+Phạm vi được định nghĩa một cách rõ ràng này được gọi là `Giới hạn ngữ cảnh`.
+
+Do đó với ví dụ về hệ thống EC phía trên ta sẽ chia thành 2 ngữ cảnh:
+- Ngữ cảnh bán hàng
+- Ngữ cảnh vận chuyển
+
+![File_000](https://user-images.githubusercontent.com/15076665/174430292-468518c7-389f-445d-b57c-29df0814108c.png)
+
+Với từng ngữ cảnh riêng ta sẽ sử dụng duy nhất `một model` và `một ngôn ngữ` trong ngữ cảnh đó mà thôi
+
+### Suy nghĩ về DB
+
+Khi thiết kế sơ đồ domain model, ta sẽ dễ dàng bị ảnh hưởng bởi những liên tưởng tới cấu trúc của DB. Để tránh điều này hãy nghĩ rằng bạn đang sử dụng NoSQL và mọi thứ trong hệ thống của bạn là object.
+
+### Kết tập và Transaction
+
+Khi tiến hành thiết kế sơ đồ domain model, hãy tránh những yếu tố kĩ thuật và chỉ tập trung vào việc thiết kế một sơ đồ mang tính trừu tượng cao. Nhưng khi thiết kế kết tập, hãy chú ý tới transaction.
