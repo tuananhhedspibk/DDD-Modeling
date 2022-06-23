@@ -81,3 +81,13 @@ Tư tưởng chính ở đây đó là Application sẽ tương tác với thế
 Về tư tưởng thì `Hexagonal Architecture` và `Layerd Architecture` hoàn toàn giống nhau do layerd architecture lấy cảm hứng từ hexagonal, nhưng có sự phân hoá tầng rõ rệt ở bên trong Application.
 
 ### Clean Architecture
+
+Kiến trúc này là sự tổng hợp và kế thừa từ `Onion Architecture` và `Hexagonal Architecture`.
+
+![1_0u-ekVHFu7Om7Z-VTwFHvg](https://user-images.githubusercontent.com/15076665/175429364-68f2d02f-2956-4278-8ea6-c84ae3377139.png)
+
+Cách đặt tên từng tầng có thể có đôi chút khác biệt:
+- Usecase Layer → Application layer
+- Adapter Layer → Interface Adapter Layer
+
+Nhưng về cơ bản nó vẫn kế thừa mọi yếu tố từ 2 kiến trúc `Onion Architecture` và `Hexagonal Architecture`.
