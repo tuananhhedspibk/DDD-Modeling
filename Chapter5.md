@@ -91,3 +91,18 @@ Cách đặt tên từng tầng có thể có đôi chút khác biệt:
 - Adapter Layer → Interface Adapter Layer
 
 Nhưng về cơ bản nó vẫn kế thừa mọi yếu tố từ 2 kiến trúc `Onion Architecture` và `Hexagonal Architecture`.
+
+### So sánh giữa Onion Architecture và Clean Architecture
+
+Về cơ bản hai kiến trúc này đều kế thừa những tư tưởng của `Hexagonal Architecture` tuy nhiên có 2 điểm khác biệt như dưới đây khi ta áp dụng DDD với chúng
+
+**1. Sự đơn giản**
+
+Về cơ bản thì `Onion Architecture` không có nhiều yếu tố bên trong như `Clean Architecture`. Đối với một ứng dụng web thông thường thì ta cũng không cần quá nhiều yếu tố bên trong đến vậy
+
+**2. Tư tưởng về nghiệp vụ của layer là khác nhau**
+
+Xét entity layer của `Clean architecture`. Ở đây có ghi là `Enterprise wide business rules` - tức là nghiệp vụ ở tầng này sẽ được sử dụng cho toàn bộ hệ thống / doanh nghiệp. Nhưng trong DDD ta cần phân chia rõ từng context trong một hệ thống / doanh nghiệp nên việc áp dụng quy tắc trên cho DDD là không hợp lí.
+
+### Thực thi việc phân chia từng context
+
