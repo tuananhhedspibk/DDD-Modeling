@@ -24,3 +24,29 @@ Hơn nữa giá trị của 2 tờ tiền này luôn là 10,000 - KHÔNG BAO GI�
 Điều này đồng nghĩa với việc
 
 > Entity thì có thể thay đổi còn Value-Object thì bất biến
+
+### Domain Service
+
+Dùng khi `việc biểu thị model bằng một object là không thể`. Thông thường sẽ thao tác với một tập các objects.
+
+VD: một ví dụ tiêu biểu đó là việc check xem mail có bị trùng lặp hay không - nói cách khác mail đã được sử dụng cho user trong hệ thống hay chưa. Bản thân một user object có thể biết được mail của mình nhưng không thể biết được thông tin về mail của object khác nên việc tự nó kiểm tra là điều không thể.
+
+Những trường hợp như trên thường sẽ được xử lí bởi `domain service`.
+
+Thế nhưng:
+
+> Hãy cố gắng sử dụng entity và value-object nhiều nhất có thể và hạn chế tối đa việc sử dụng domain-service
+
+Lí do là bởi nếu vô tình viết nhiều `business logic` vào đây thì trong tương lai nó sẽ trở thành một `Fat class` một cách không mong muốn.
+
+### Repository
+
+Repository dùng để lưu thông dữ liệu của một `kết tập` vào DB.
+
+Các dữ liệu của một `kết tập` thường sẽ có tính gắn kết cao.
+
+Một repository sẽ gắn với một `kết tập`, tuy nhiên việc truyền kết tập vào repository hay trả về kết tập từ repository đều phải thông qua `kết tập gốc` - `root aggregate`. Việc tham chiếu đến các object con bên trong aggregate đều phải thông qua `root aggregate` này.
+
+Tuy nhiên không được phép trả về trực tiếp object con từ repository hoặc tạo một repository dùng riêng cho object con
+
+> Repository sẽ được sử dụng như một LIST
