@@ -104,5 +104,43 @@ Về cơ bản thì `Onion Architecture` không có nhiều yếu tố bên tron
 
 Xét entity layer của `Clean architecture`. Ở đây có ghi là `Enterprise wide business rules` - tức là nghiệp vụ ở tầng này sẽ được sử dụng cho toàn bộ hệ thống / doanh nghiệp. Nhưng trong DDD ta cần phân chia rõ từng context trong một hệ thống / doanh nghiệp nên việc áp dụng quy tắc trên cho DDD là không hợp lí.
 
-### Thực thi việc phân chia từng context
+### Thực thi việc phân chia context
 
+Nói về việc phân chia context ta có thể nghĩ ngay đến một cách làm rất đơn giản đó là `1 context - 1 application`, điều này đồng nghĩa với việc triển khai microservice
+
+Cách làm này khá khó và cũng rất tốn nhiều chi phí.
+
+Ngược lại có một cách tiếp cận khác đó là `1 application - n context`. Cách làm này sẽ khó ở khâu phia chia context trong một ứng dụng.
+
+**Với 1 context - 1 application**
+
+Quay trở lại ví dụ về trang EC ở phía trên, ta có thể phân chia trang EC thành 2 context như sau:
+
+![File_000 (1)](https://user-images.githubusercontent.com/15076665/176199686-19816ab6-6c53-4ab9-ab95-9010b89f3baa.png)
+
+Sơ đồ thực thi sẽ như sau:
+
+![File_000](https://user-images.githubusercontent.com/15076665/176199677-2903dcac-8676-44b9-bc51-e33ee5a89c14.png)
+
+Phía trên là sơ đồ mô ta quá trình 2 contexts tương tác với nhau. Về cơ bản có 2 cách tương tác đó là:
+- Đồng bộ: thông qua lời gọi trực tiếp (VD: REST API call)
+- Bất đồng bộ: thông qua việc gửi các event (VD: AWS SQS)
+
+**Với 1 application - n context**
+
+Ta sẽ tiến hành phân chia các folder tương ứng với các context như ví dụ sau:
+
+```
+app
+--- delivery
+------- domain
+------- infra
+------- repo
+
+--- sale
+------- domain
+------- infra
+------- repo
+```
+
+> Hãy chia folder cẩn thận ngay từ đầu để có thể dễ dàng chia nhỏ app khi app phình to sau này
