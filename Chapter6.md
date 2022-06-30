@@ -50,3 +50,25 @@ Một repository sẽ gắn với một `kết tập`, tuy nhiên việc truyề
 Tuy nhiên không được phép trả về trực tiếp object con từ repository hoặc tạo một repository dùng riêng cho object con
 
 > Repository sẽ được sử dụng như một LIST
+
+Cụ thể như sau: Repository sẽ không chứa LIST các method như `Register User` hay `Suspend User` mà thay vào đó nó sẽ chứa **LIST các users** với các trạng thái như `Registing` hay `Suspending`. Việc làm này giúp cho repository không phải chứa quá nhiều các method liên quan đến business logic.
+
+Hơn nữa cách làm trên cũng giúp ta dễ dàng thực hiện `In memory mock` khi tiến hành test. Do vậy nếu repository có chứa `business logic` thì sẽ không đảm bảo được tính chính xác khi test
+
+### Factory
+
+Được sử dụng để tạo ra object mới khi logic tạo object phức tạp hoặc trong trường hợp cần có sự tham chiếu đến một kết tập khác.
+
+Factory cũng có thể được coi như một loại `domain service`
+
+Do nó biểu thị domain logic nên nó cũng có thể tham chiếu hoặc sử dụng `repository`.
+
+### Các object khác ở tầng domain
+
+Ngoài cách thiết kế `chiến thuật` như đã nói ở trên, nếu đảm bảo `tính liên kết cao` và `tính phụ thuộc thấp` thì các cách thiết kế khác cũng hoàn toàn có thể được sử dụng.
+
+Ví dụ như: `First class collection` hoặc sử dụng `enum` để biểu thị business logic.
+
+> Điều quan trọng nhất với tầng domain đó là: biểu thị được domai logic và viết các object biểu thị các model
+
+Nếu đảm bảo được 2 yếu tố trên thì dù là cách thiết kế hay triển khai nào cũng đều OK cả.
