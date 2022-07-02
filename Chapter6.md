@@ -122,4 +122,53 @@ Không nhất thiết. Điều quan trọng ở đây đó là **tầng infra ph
 
 Nên thực thi ở tầng infra. Repository interface sẽ có tính trừu tượng cao nên việc thực thi sắp xếp sẽ được triển khai ở tầng infra thông qua dấu hiệu là một `tham số` chỉ thứ tự sắp xếp chẳng hạn.
 
-#### QA - Thực thi cache
+### QA - Thực thi cache
+
+Nên cân nhắc khi thực thi với CQRS. Ta sẽ định nghĩa các query-model riêng dùng để query và sẽ thực thi cache nhằm tăng performance ở chỗ lấy thông tin cho query model.
+
+### QA - Mối quan hệ giữa external API và Repository
+
+Với các giá trị đưa vào external API và nhận về từ external API nếu nó có ý nghĩa với tầng domain thì ta cũng nên định nghĩa nó ở tầng domain.
+
+Còn nếu không thì ta có thể tham khảo ví dụ về việc sử dụng notification sau. Việc nhận và sử dụng notification từ external API sẽ được thực hiện ở tầng usecase. Ta sẽ định nghĩa `NotificationAdapter` interface ở tầng này và implement nó ở tầng infra.
+
+### QA - Cách lưu trữ, sử dụng dữ liệu lấy về từ external API
+
+Bản thân Repository interface ở tầng domain mang tính trừu tượng cao, nó chỉ quan tâm `Đưa ra điều kiện nào và lấy về được dữ liệu nào` mà thôi, còn quá trình:
+- Lấy dữ liệu
+- Chuyển đổi dữ liệu
+sẽ được thực thi ở tầng infra
+
+### QA - Sự gắn kết giữa các entities
+
+Lấy ví dụ: 1 user sẽ có N tasks thì khi thực thi ta nên chọn cách nào
+① Task class sẽ chứa userId
+② User class sẽ chứa list các tasks
+
+Như đã biết **nếu trong cùng 1 kết tập thì sẽ tham chiếu theo instance, còn khác kết tập thì tham chiếu theo ID**. Do đó
+
+① Sẽ áp dụng nếu `User` và `Task` không nằm trong cùng một kết tập
+
+② Sẽ áp dụng khi `User` và `Task` nằm trong cùng một kết tập. Khi đó việc thêm, bớt task sẽ thực thi thông qua `Task List` và ta sẽ truyền toàn bộ dữ liệu có trong user instance vào repository để nó lưu vào DB. Thực tế thì việc "ép" `User` và `Task` vào cùng 1 kết tập đã là một điều không thể. Do đó để chuyển về thực thi phương án ① bạn cần phải thay đổi về phạm vi và cách thiết kế kết tập.
+
+### QA - Lí do định nghĩa Repository Interface ở tầng domain
+
+Mục đích chính là để thể hiện rõ phạm vi của kết tập tại tầng domain. Repository method cũng sẽ định nghĩa việc lưu trữ entity hoặc value-object dưới đơn vị gì.
+
+Nếu định nghĩa Repository Interface ở tầng use-case thì khi use-case thay đổi thì phạm vi giới hạn của kết tập cũng có thể thay đổi theo.
+
+Ngoài ra domain-service cũng không thể tham chiếu đến repository nếu repository được định nghĩa ở tầng use-case.
+
+### QA - Update một phần của entity
+
+Khi update entity ta cần phải truyền toàn bộ entity vào repository chứ không phải chỉ phần muốn update. Lí do là bởi repository bắt buộc phải thực hiện ở đơn vị kết tập.
+
+Do tính ràng buộc về dữ liệu của kết tập sẽ được object `kết tập gốc` - `Aggregate Root` quản lí nên việc update một phần dữ liệu của kết tập mà không thông qua `Aggregate root` là điều không được phép.
+
+### QA - Liệu có nên theo tác với repository từ entity
+
+Điều này là không nên vì khi đó entity sẽ bị phình to quá mức dẫn đến việc khó bảo trì và đọc hiểu hệ thống.
+
+### QA - Chỉ cần truyền ID khi muốn xoá entity
+
+Đó là bởi nếu truyền một entity instance hoàn chỉnh thì sẽ cần phải lấy dữ liệu của entity đó từ DB về và điều này là điều vô nghĩa.
