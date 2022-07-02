@@ -81,3 +81,45 @@ Có 2 cách:
 ② Sử dụng domain event, cụ thể là ở tầng domain ta sẽ tạo ra các event để từ đó gọi đến các kết tập. Cách làm này luôn đảm bảo tính ràng buộc về dữ liệu tuy nhiên lại khá khó để triển khai.
 
 ### QA - Mục đích của việc đưa logic vào tầng domain
+
+Khi đưa quá nhiều logic vào tầng domain có thể dẫn tới tình trạng các tầng phụ thuộc vào tầng domain này sẽ bị ảnh hưởng nếu tầng domain có sự thay đổi.
+
+Ở đây ta có nguyên tắc về `sự phụ thuộc ổn định` - SDP: Stable Dependencies Principle. Nguyên tắc này nói rằng
+
+> Sẽ rất khó để sửa 1 component mà có nhiều components khác phụ thuộc vào nó, thay vào đó hãy để chúng phụ thuộc vào các modules ít bị thay đổi
+
+Mục đích chính của việc đưa tầng domain thành 1 tầng độc lập là để `dễ dàng thay đổi`.
+Tầng domain luôn thay đổi để phản ánh đúng và đủ nội dung của nghiệp vụ vậy nên việc để tầng domain bị ảnh hưởng hay phụ thuộc vào các công nghệ như:
+- Framework
+- Database
+thì sẽ dễ dẫn đến những tình trạng như: do framework hay db này không hỗ trợ tính năng này nên việc triển khai nghiệp vụ là điều không thể.
+
+Khi điều đó diễn ra thường xuyên sẽ làm cho domain và nghiệp vụ thực tế bị xa rời nhau dẫn đến hệ thống làm ra không có khả năng giải quyết được vấn đề đang gặp phải.
+
+Nếu sự chỉnh sửa domain làm ảnh hưởng đến các tầng khác thì quá trình test sẽ xử lí điều này.
+
+### QA - Khả năng sử dụng các kiểu dữ liệu nguyên thuỷ
+
+Ngoài việc sử dụng value-object, bạn cũng có thể cân nhắc việc sử dụng các kiểu dữ liệu nguyên thuỷ nếu thấy phù hợp.
+
+### QA - Dữ liệu lấy ra từ DB nên được thể hiện như thế nào ở instance
+
+Có thể tạo các `constructor` chuyên dụng, `constructor` này sẽ nhận dữ liệu đầu vào và giữ nguyên giá trị khi tạo instance.
+
+Cũng cần chú ý về tính `private / public` của các constructors này.
+
+### QA - Có thể viết các reconstruct methods ở tầng infra ?
+
+Hoàn toàn có thể nhưng điều này nên được cân nhắc tuỳ theo ngôn ngữ lập trình được sử dụng.
+
+Ví dụ với Java, nếu ta viết ở tầng infra thì sẽ không tận dụng được tính **reflection** về kiểu dữ liệu của nó.
+
+### QA - Liệu domain object có cần chứa các thuộc tính giống y hệt như các cột của table trong DB hay không ?
+
+Không nhất thiết. Điều quan trọng ở đây đó là **tầng infra phải phụ thuộc vào tầng domain** nên việc tầng domain mang những thuộc tính gì là do nghiệp vụ chứ không nhất thiết là phải giống như ở tầng infra.
+
+### QA - Thực thi sắp xếp
+
+Nên thực thi ở tầng infra. Repository interface sẽ có tính trừu tượng cao nên việc thực thi sắp xếp sẽ được triển khai ở tầng infra thông qua dấu hiệu là một `tham số` chỉ thứ tự sắp xếp chẳng hạn.
+
+#### QA - Thực thi cache
