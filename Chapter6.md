@@ -72,3 +72,12 @@ Ví dụ như: `First class collection` hoặc sử dụng `enum` để biểu t
 > Điều quan trọng nhất với tầng domain đó là: biểu thị được domai logic và viết các object biểu thị các model
 
 Nếu đảm bảo được 2 yếu tố trên thì dù là cách thiết kế hay triển khai nào cũng đều OK cả.
+
+### Đảm bảo tính ràng buộc về dữ liệu giữa các kết tập
+
+Có 2 cách:
+① Thực thi ở tầng use-case: ở tầng này ta sẽ sử dụng các repository tương ứng với các kết tập để lưu dữ liệu. Cách này đơn giản tuy nhiên nếu use-case khác cũng thực hiện việc tương tự thì có thể dẫn tới xung đột dữ liệu
+
+② Sử dụng domain event, cụ thể là ở tầng domain ta sẽ tạo ra các event để từ đó gọi đến các kết tập. Cách làm này luôn đảm bảo tính ràng buộc về dữ liệu tuy nhiên lại khá khó để triển khai.
+
+### QA - Mục đích của việc đưa logic vào tầng domain
