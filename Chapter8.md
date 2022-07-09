@@ -126,3 +126,29 @@ Event sourcing ngoài việc cải thiện hiệu năng còn giúp:
 - Lưu vết những lần lưu trữ dữ liệu
 
 ### QA
+
+#### Phân chia query service
+
+Tron trường hợp cần phải thực hiện từ 2 lần truy vấn DB trở lên thì ta có thể xử lí theo những hướng sau:
+- Nếu mối liên hệ giữa 2 lần truy vấn là đơn giản thì ta nên gộp chúng lại làm 1, trong một query service duy nhất
+- Nếu truyền kết quả từ lần truy vấn 1 vào làm điều kiện cho lần truy vấn 2 thì ta nên tách query service ra để dễ dàng test
+
+#### Sử dụng giá trị trả về dưới dạng DTO
+
+Do giá trị trả về từ `query service` không được phụ thuộc vào phía client nên ở `controller` nên có những class convert kiểu dữ liệu trả về.
+
+#### Có nên định nghĩa read model riêng ?
+
+Giả sử ta có màn hình maintaince, màn hình này cần phải cập nhật dữ liệu nên sẽ sử dụng `write model`, xong có một số UI cần query đến dữ liệu thì có nhất thiết phải định nghĩa một `read model` dùng riêng hay không ?
+
+Câu trả lời là nếu không cần thiết thì có thể sử dụng repository cũng được.
+
+#### Khi quá trình triển khai gây ảnh hưởng lên tầng domain
+
+Trong quá trình triển khai, khi xem xét đến phạm vi của transaction hoặc kết tập thì việc phải chỉnh sửa tầng domain là điều khó tránh. Tuy nhiên việc `N + 1 query problem` làm ảnh hưởng lên tầng domain là điều cần tránh. Sẽ có 2 giải pháp như sau:
+- Xem xét xem liệu có thể giải quyết được ở tầng infra hay không
+- Cân nhắc việc sử dụng CQRS
+
+#### Cách xử lí khi chỉ muốn lấy về một phần dữ liệu của kết tập
+
+Về cơ bản thì có thể sử dụng repository để lấy về dữ liệu về tại use-case, sau đó sẽ cân nhắc sử dụng những dữ liệu cần thiết. Tuy nhiên nếu chú ý về vấn đề hiệu năng thì hãy nghĩ đến CQRS.
