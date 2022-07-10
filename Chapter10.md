@@ -67,4 +67,29 @@ Với **tầng presentation** thì như đã nói ở chương trước, việc 
 
 ### OR mapper
 
-Một ví dụ tiêu biểu là `ActiveRecord`. Đây là các class tương ứng với các bảng trong DB. Việc sử dụng các class này trong tầng domain là điều **không được phép**
+Một ví dụ tiêu biểu là `ActiveRecord`. Đây là các class tương ứng với các bảng trong DB. Việc sử dụng các class này trong tầng domain là điều **không được phép**. Nguyên nhân là vì 2 lí do sau đây:
+- Mọi thuộc tính đều có setter nên sẽ khó có thể kiểm soát được các xử lí update dữ liệu
+- Do không thể tách rời được `table` và `object` nên quá trình thiết kế `table` và `object` sẽ gặp phải nhiều ràng buộc không mong muốn
+
+Do đó ActiveRecord sẽ chỉ được sử dụng cho object ở tầng infra mà thôi nên sau khi lấy dữ liệu từ DB ta cần convert thành `object type` được định nghĩa ở tầng domain, để khi đó `tầng domain` và `tầng usecase` không cần phải quan tâm đến `OR Mapper`
+
+### Các ràng buộc làm cho object và table không tách rời được
+
+Ta lấy ví dụ với kết tập "user" và "address" (giả sử cả user và address đều thuộc cùng một kết tập). Khi đó `user` sẽ có sự tham chiếu đến `address`.
+Lúc này `address` sẽ được coi như một value-object và được xem như một "member" của `user`. Như ta thấy ở sơ đồ ER phía dưới (khi tiến hành lưu trữ vào DB), address chứa thông tin userId (đây có thể xem như **một sự tham chiếu ngược**). Sau đó sẽ phát sinh vấn đề là `address` sẽ chứa tham chiếu tới `user`.
+
+Và thế là khi tạo `address` ta cần truyền thêm cả `userID` vào ??? Đây là một điều rất kì lạ phải không.
+
+![File_000](https://user-images.githubusercontent.com/15076665/178129256-286fc06b-38e8-419e-b288-e118bf8b8c14.png)
+
+Ví dụ trên đây là điển hình cho việc phát sinh các ràng buộc giữa object và table.
+
+> Khi các ràng buộc giữa table và object ngày càng tăng sẽ làm cho việc thực thi không đi liền với sơ đồ domain model đã thiết kế trước đó
+
+### Ngôn ngữ
+
+Các ngôn ngữ OOP, định kiểu tĩnh (Java, Scala) khá phù hợp để triển khai DDD
+Các ngôn ngữ định kiểu động (JS, PHP, Python) sẽ không đem lại hiệu quả cao
+
+Còn Ruby thì không thể triển khai DDD được.
+
