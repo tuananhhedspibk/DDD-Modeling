@@ -7,7 +7,9 @@ Kết tập là một tập hợp các object có liên quan đến nhau chặt 
 ### Các quy tắc khi thiết kế và thực thi
 
 Có 2 quy tắc chính ở đây:
+
 ① Việc đảm bảo tính thống nhất về mặt dữ liệu phải được đưa vào một kết tập duy nhất
+
 ② Bắt buộc chỉ có duy nhất 1 transaction
 
 Với quy tắc ① ta xét ví dụ sau: các CLB ở trường học sẽ có các thành viên tham gia, khi số lượng thành viên đạt tới 5 thì trạng thái của CLB sẽ trở thành "full người" còn nhỏ hơn hoặc 4 sẽ là "còn chỗ".
