@@ -175,11 +175,15 @@ Lúc này mọi public setter đều bị khai trừ, nên ta sẽ tránh đư�
 ### Nguyên tắc cơ bản khi thiết kế Object ở tầng Domain
 
 Có 2 nguyên tắc cơ bản sau:
+
 ① Ghi mọi domain knowledge vào object
+
 ② Chỉ cho phép những instances chuẩn chỉ được tồn tại
 
 Với nguyên tắc ②, bất cứ khi nào lưu dữ liệu vào DB, ta cũng cần xác thực xem dữ liệu của domain model object có bị xung đột hay không. Để thực hiện việc xác thực này ta có 2 cách sau:
+
 ① Áp đặt điều kiện khi tạo instance
+
 ② Áp đặt điều kiện chỉnh sửa
 
 Với ① ta sẽ tiến hành tạo instance thông qua `constructor` hoặc `factory method`, bằng cách này ta có thế áp đặt các điều kiện về mặt dữ liệu khi tạo instance từ đó tránh được tình trạng xung đột dữ liệu.
