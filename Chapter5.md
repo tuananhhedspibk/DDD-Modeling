@@ -19,6 +19,7 @@ Ta có sơ đồ use-case như sau:
 ![File_000 (1)](https://user-images.githubusercontent.com/15076665/174480224-e0b30063-1e91-40a7-92a9-00a83b37e45f.png)
 
 Về domain knowledge thì ta có thể chia thành hai nhóm:
+
 ① User
 - Không thể tăng đăng kí nhiều mail cùng 1 lúc
 - Khi mới tạo sẽ có trạng thái là `USING` nhưng cũng có thể chuyển đổi thành `SUSPENDING`
