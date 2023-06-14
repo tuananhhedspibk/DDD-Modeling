@@ -25,7 +25,9 @@ Việc làm này giúp tăng tính trừu tượng cho các method ở phía t�
 ### Return Value Class từ Usecase
 
 Về việc truyền giá trị trả về từ tầng use-case xuống tầng presentation, ta có 2 cách làm như sau:
+
 ① Tạo một class chuyên dùng để chứa kiểu dữ liệu truyền xuống này
+
 ② Truyền nguyên domain object xuống tầng presentation
 
 Về cách ① có ưu, nhược điểm như sau:
