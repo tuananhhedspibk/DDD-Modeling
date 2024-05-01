@@ -119,7 +119,8 @@ Như ví dụ trên ta thấy nếu viết domain knowledge ở tầng use-case 
 
 Hãy tập trung viết chúng vào tầng domain
 
-![File_000 (1)](https://user-images.githubusercontent.com/15076665/173223420-b03e5b24-5711-4d33-9810-68cc3542257e.png)
+![Screenshot 2024-05-01 at 21 32 51](https://github.com/tuananhhedspibk/tuananhhedspibk.github.io/assets/15076665/12e554cd-174c-4540-b0fb-cc244ed8f107)
+
 
 Nếu viết domain knowledge vào tầng domain thì tầng use-case trông sẽ như thế này.
 
