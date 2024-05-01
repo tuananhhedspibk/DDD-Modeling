@@ -5,7 +5,7 @@
 Là sơ đồ mô tả các hành động của hệ thống nhằm đáp ứng yêu cầu từ phía người dùng.
 Lấy ví dụ với ứng dụng quản lí task, ta sẽ có sơ đồ usecase như sau:
 
-![File_000](https://user-images.githubusercontent.com/15076665/173172319-c5ecf2c2-a0f4-4295-bc88-869b8436e6fd.png)
+![Screenshot 2024-05-01 at 21 11 49](https://github.com/tuananhhedspibk/tuananhhedspibk.github.io/assets/15076665/871c0a6e-2867-4019-9f2e-a874c1a6978a)
 
 `Sơ đồ use-case` sẽ được tạo ra trước `sơ đồ domain model`. Vậy tại sao ta lại cần sơ đồ use-case. Sau đây là lí do:
 - Nếu ta không rõ được các use-cases thì việc thiết kế model sẽ trở nên khó khăn. Ở ví dụ trên nếu đứng ở góc độ của người làm việc thì quá trình quản lí task sẽ khác so với góc độ quản lí task của người quản lí (manager)
