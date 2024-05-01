@@ -29,7 +29,7 @@ Sau khi thiết kế Aggregate xong ta có thể quyết định cách thiết k
 > Bất kể với sơ đồ use-case hay sơ đồ domain model thì khi tiến hành trao đổi ý kiến với các thành viên khác trong team, ta đều nên viết ra white board để mọi người có thể cùng nhau trao đổi ý kiến và hoàn thành các sơ đồ trên.
 
 Với sơ đồ use-case về ứng dụng quản lí task, ta có thể đưa ra sơ đồ domain model như sau:
-![File_000 (1)](https://user-images.githubusercontent.com/15076665/173173287-824ffb66-6d00-4e00-9feb-29410ec72fa2.png)
+![Screenshot 2024-05-01 at 21 18 37](https://github.com/tuananhhedspibk/tuananhhedspibk.github.io/assets/15076665/a046a6c0-af0d-42c5-a744-9b107867b93f)
 
 Ta có thể thấy rằng 1 user có thể có 0..n task và cũng có thể thấy được các rules khi khởi tạo hoặc thay đổi user, task.
 
