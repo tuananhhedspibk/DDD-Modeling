@@ -114,7 +114,8 @@ Không những thế từ code để hiểu được model cũng sẽ rất khó
 
 Như ví dụ trên ta thấy nếu viết domain knowledge ở tầng use-case sẽ phát sinh những vấn đề khá nghiêm trọng. Do đó thay vì viết ở tầng use-case như hình bên dưới
 
-![File_000 (2)](https://user-images.githubusercontent.com/15076665/173223414-d72665a7-dfd1-4a8b-b5e6-24ff442d6385.png)
+![Screenshot 2024-05-01 at 21 31 46](https://github.com/tuananhhedspibk/tuananhhedspibk.github.io/assets/15076665/16f625c6-02ac-4cd9-b55d-6e573f606aac)
+
 
 Hãy tập trung viết chúng vào tầng domain
 
