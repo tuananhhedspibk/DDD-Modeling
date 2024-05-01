@@ -23,8 +23,7 @@ Vậy nên `Club` và `Member` sẽ được cho vào cùng một "kết tập" 
 
 Trong một kết tập, Object cha sẽ được gọi là `Root Aggregate` hoặc `Kết tập nguồn`.
 
-![Screenshot 2024-05-01 at 21 54 01](https://github.com/tuananhhedspibk/tuananhhedspibk.github.io/assets/15076665/a35145b9-90ba-489f-92a8-5126c108c03b)
-
+![Screenshot 2024-05-01 at 22 05 18](https://github.com/tuananhhedspibk/tuananhhedspibk.github.io/assets/15076665/5c7a63c7-9748-45a3-a717-1eea4250c501)
 
 Với quy tắc thứ ② **ta phải lấy từ repository bằng một đơn vị kết tập và truyền vào repository cũng bằng một đơn vị kết tập**. Mục đích chính ở đây là để đảm bảo toàn vẹn về mặt dữ liệu của kết tập.
 
