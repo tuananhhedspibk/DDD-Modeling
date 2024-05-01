@@ -55,7 +55,8 @@ Khi ghi chép để biểu thị các Aggregate (kết tập), ta cần thể hi
 
 Ở đây ta định nghĩa theo từng tầng (tầng nào sẽ dùng để triển khai class nào).
 
-![File_000](https://user-images.githubusercontent.com/15076665/173221933-fc1299f9-389c-4bdf-a5ac-6b76a6bbf58b.png)
+![Screenshot 2024-05-01 at 21 26 17](https://github.com/tuananhhedspibk/tuananhhedspibk.github.io/assets/15076665/69f72072-9277-4698-83b5-4179ee477465)
+
 
 ### DDD Amenia Code
 
