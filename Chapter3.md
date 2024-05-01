@@ -14,7 +14,8 @@ Có 2 quy tắc chính ở đây:
 
 Với quy tắc ① ta xét ví dụ sau: các CLB ở trường học sẽ có các thành viên tham gia, khi số lượng thành viên đạt tới 5 thì trạng thái của CLB sẽ trở thành "full người" còn nhỏ hơn hoặc 4 sẽ là "còn chỗ".
 
-![File_000](https://user-images.githubusercontent.com/15076665/173837434-e33c0a12-7953-4045-a86a-b17777f2a87e.png)
+![Screenshot 2024-05-01 at 21 49 19](https://github.com/tuananhhedspibk/tuananhhedspibk.github.io/assets/15076665/f4597436-3e8f-4a6c-9a5b-a209e82b619f)
+
 
 Lúc này trạng thái của CLB và số lượng thành viên trong CLB sẽ có mối liên hệ chặt chẽ.
 
