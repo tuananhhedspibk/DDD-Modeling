@@ -23,7 +23,8 @@ Vậy nên `Club` và `Member` sẽ được cho vào cùng một "kết tập" 
 
 Trong một kết tập, Object cha sẽ được gọi là `Root Aggregate` hoặc `Kết tập nguồn`.
 
-![File_000](https://user-images.githubusercontent.com/15076665/173838944-d55ed06b-84e4-4e50-a894-32fd335d7aed.png)
+![Screenshot 2024-05-01 at 21 54 01](https://github.com/tuananhhedspibk/tuananhhedspibk.github.io/assets/15076665/a35145b9-90ba-489f-92a8-5126c108c03b)
+
 
 Với quy tắc thứ ② **ta phải lấy từ repository bằng một đơn vị kết tập và truyền vào repository cũng bằng một đơn vị kết tập**. Mục đích chính ở đây là để đảm bảo toàn vẹn về mặt dữ liệu của kết tập.
 
@@ -49,7 +50,7 @@ Như đã nói ở trên, ta sẽ lấy về kết tập, update nó chỉ trong
 
 Với ví dụ về CLB nói trên, nếu `Club` là con của object `School` thì khi ta update một `Club` thì `School` và các `Club` khác sẽ bị lock và không thể update được.
 
-![File_000 (1)](https://user-images.githubusercontent.com/15076665/173846343-2b9a9b50-4cff-48b8-99ba-625a199664eb.png)
+![Screenshot 2024-05-01 at 21 54 01](https://github.com/tuananhhedspibk/tuananhhedspibk.github.io/assets/15076665/7f17b146-2ff0-4938-afaa-481125ad91d3)
 
 ### Giới hạn ngữ cảnh
 
@@ -68,7 +69,7 @@ Giả sử bạn đang build một hệ thống EC với sự tham gia của cá
 
 Bạn đang thiết kế model `Product`, thế nhưng có một vấn đề đó là mỗi team sẽ có cách hiểu về `Product` khác nhau
 
-![File_000 (2)](https://user-images.githubusercontent.com/15076665/173850043-6c28cb7e-c14a-4e5a-a89b-b7142db1346a.png)
+![Screenshot 2024-05-01 at 21 56 41](https://github.com/tuananhhedspibk/tuananhhedspibk.github.io/assets/15076665/7b191c0d-e11f-4459-baa5-9d9f74ae1a2c)
 
 > Do đó khi quy mô của project ngày một lớn thì sẽ rất khó để tạo được một model thống nhất cho toàn bộ hệ thống
 
@@ -84,7 +85,7 @@ Do đó với ví dụ về hệ thống EC phía trên ta sẽ chia thành 2 ng
 - Ngữ cảnh bán hàng
 - Ngữ cảnh vận chuyển
 
-![File_000](https://user-images.githubusercontent.com/15076665/174430292-468518c7-389f-445d-b57c-29df0814108c.png)
+![Screenshot 2024-05-01 at 21 58 09](https://github.com/tuananhhedspibk/tuananhhedspibk.github.io/assets/15076665/c37ac11e-ce63-4587-a547-504071f576e9)
 
 Với từng ngữ cảnh riêng ta sẽ sử dụng duy nhất `một model` và `một ngôn ngữ` trong ngữ cảnh đó mà thôi
 
