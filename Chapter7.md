@@ -47,7 +47,7 @@ Nếu thực thi cách thứ ② thì domain object cần có các `method phụ
 
 Bạn có thể đặt tên theo format **XXXDTO** - **DTO** là **Data Transfer Object**
 
-![File_000 (2)](https://user-images.githubusercontent.com/15076665/176991118-62750bda-4af4-42a0-850b-54f83435f77a.png)
+![Screenshot 2024-05-02 at 23 20 54](https://github.com/tuananhhedspibk/tuananhhedspibk.github.io/assets/15076665/fcd98f68-7f12-47b3-bdd1-2ee38f2b2138)
 
 ### QA - Phân chia class ở tầng use-case
 
