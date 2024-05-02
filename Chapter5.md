@@ -4,7 +4,7 @@
 
 Dưới đây là kiến trúc được nhiều hệ thống web sử dụng
 
-![File_000](https://user-images.githubusercontent.com/15076665/174479794-17b8bdde-5db4-4a3b-ad4b-c98b7f0f586f.png)
+![Screenshot 2024-05-02 at 22 36 15](https://github.com/tuananhhedspibk/tuananhhedspibk.github.io/assets/15076665/a204467f-0bd8-4a0a-a4e5-3fc0bd558c3b)
 
 Có một vấn đề đối với kiến trúc này đó là tính liên kết thấp ở tầng `business logic`. Sẽ xuất hiện các classes kiểu như `XXXService` hoặc `XXXLogic` với hàng trăm, hàng ngàn dòng từ đó làm tăng chi phí bảo trì cũng như làm giảm đi tính dễ đọc của code.
 
@@ -16,7 +16,7 @@ Tại sao lại nói tính liên kết thấp, chúng ta hãy xét ví dụ về
 
 Ta có sơ đồ use-case như sau:
 
-![File_000 (1)](https://user-images.githubusercontent.com/15076665/174480224-e0b30063-1e91-40a7-92a9-00a83b37e45f.png)
+![Screenshot 2024-05-02 at 22 38 09](https://github.com/tuananhhedspibk/tuananhhedspibk.github.io/assets/15076665/fc517506-8f67-4ac4-86e1-0fc815fb6c35)
 
 Về domain knowledge thì ta có thể chia thành hai nhóm:
 
@@ -34,7 +34,7 @@ Hơn nữa domain knowledge có 2 phần là: `model` và `table` nên domain kn
 
 ### Layerd Architecture
 
-![File_000](https://user-images.githubusercontent.com/15076665/174481079-c053b2dd-a946-477e-b666-3359a17a5d2e.png)
+![Screenshot 2024-05-02 at 22 36 15](https://github.com/tuananhhedspibk/tuananhhedspibk.github.io/assets/15076665/a204467f-0bd8-4a0a-a4e5-3fc0bd558c3b)
 
 Ở kiến trúc này ta tách `business logic layer` thành 2 layers khác là:
 - `Application layer`: thực thi usecase
@@ -48,7 +48,7 @@ Tương tự như `Layered Architecture` nhưng mối quan hệ phụ thuộc gi
 
 Chú ý: các mũi tên trắng ở hình dưới thể hiện việc implement các interface.
 
-![File_000 (3)](https://user-images.githubusercontent.com/15076665/174481441-e75fbcb5-99d3-4b61-a42c-e9809b350044.png)
+![Screenshot 2024-05-02 at 22 43 32](https://github.com/tuananhhedspibk/tuananhhedspibk.github.io/assets/15076665/04c47574-7338-4080-bd74-d984485c41e2)
 
 Do việc thực thi các `repository interface` sẽ diễn ra ở `infra layer` nên lúc này `Infra layer` sẽ phụ thuộc vào `Domain layer`.
 
@@ -67,7 +67,7 @@ Với từng tầng ta cần chú ý các điều như sau:
 - Tương tác với client
 - Các classes: **Controller**, **External-Controller**
 
-![File_000](https://user-images.githubusercontent.com/15076665/174482099-e8407758-e317-480b-8123-584ffd7c0fc8.png)
+![Screenshot 2024-05-02 at 22 48 37](https://github.com/tuananhhedspibk/tuananhhedspibk.github.io/assets/15076665/b764c98c-d332-4e95-8f7a-992d3d4f4f65)
 
 Req từ client sẽ tới Adapter (là controller). Tương tự, việc tương tác với DB cũng thông qua Adapter (implementation class của tầng infra).
 
@@ -117,11 +117,11 @@ Ngược lại có một cách tiếp cận khác đó là `1 application - n co
 
 Quay trở lại ví dụ về trang EC ở phía trên, ta có thể phân chia trang EC thành 2 context như sau:
 
-![File_000 (1)](https://user-images.githubusercontent.com/15076665/176199686-19816ab6-6c53-4ab9-ab95-9010b89f3baa.png)
+![Screenshot 2024-05-02 at 22 54 01](https://github.com/tuananhhedspibk/tuananhhedspibk.github.io/assets/15076665/a1431a07-67f3-4c0b-96ff-91d4455f1952)
 
 Sơ đồ thực thi sẽ như sau:
 
-![File_000](https://user-images.githubusercontent.com/15076665/176199677-2903dcac-8676-44b9-bc51-e33ee5a89c14.png)
+![Screenshot 2024-05-02 at 22 52 27](https://github.com/tuananhhedspibk/tuananhhedspibk.github.io/assets/15076665/c951cd08-c2ef-4b4b-abfe-803eff897fed)
 
 Phía trên là sơ đồ mô ta quá trình 2 contexts tương tác với nhau. Về cơ bản có 2 cách tương tác đó là:
 - Đồng bộ: thông qua lời gọi trực tiếp (VD: REST API call)
