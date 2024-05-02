@@ -6,7 +6,7 @@ Ngoài việc lưu trữ dữ liệu với đơn vị là các kết tập thôn
 
 Với các màn hình như vậy thì trong trường hợp chúng hiển thị dữ liệu liên quan đến nhiều kết tập khác nhau ví dụ như sau:
 
-![File_000](https://user-images.githubusercontent.com/15076665/177430834-2eb57045-8ede-4b1c-97e5-4cba8f928f07.png)
+![Screenshot 2024-05-02 at 23 26 44](https://github.com/tuananhhedspibk/tuananhhedspibk.github.io/assets/15076665/4700b702-7080-47f2-9c4a-2698a91a0854)
 
 Lúc này sẽ phát sinh một vài vấn đề như sau:
 - Ta sẽ trả về những thuộc tính không cần thiết, từ đó sẽ làm giảm hiệu năng
