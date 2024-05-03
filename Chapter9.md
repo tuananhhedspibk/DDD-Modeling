@@ -4,7 +4,7 @@
 
 Đây sẽ là tầng tương tác ra / vào trực tiếp với client. Do đó ở giữa tầng này và tầng use-case cần phải thực hiện việc convert data
 
-![File_000](https://user-images.githubusercontent.com/15076665/178100102-b6d54ae4-7634-4615-9889-5b1e9f528afd.png)
+![Screenshot 2024-05-03 at 10 53 43](https://github.com/tuananhhedspibk/tuananhhedspibk.github.io/assets/15076665/db2a9156-9e78-4ab9-b49b-52e15f4c820d)
 
 Trong ứng dụng sẽ có:
 - JSON controller nhận và trả về kết quả dưới format json
@@ -33,7 +33,7 @@ Về cơ bản thì cấu trúc của controller phụ thuộc khá nhiều vào
 
 Format của respsone trả về sẽ là mối quan tâm chính của tầng này. Ta lấy ví dụ như sau:
 
-![File_000 (1)](https://user-images.githubusercontent.com/15076665/178100514-64e0b723-5b88-4561-9091-6632580f2dd3.png)
+![Screenshot 2024-05-03 at 10 55 40](https://github.com/tuananhhedspibk/tuananhhedspibk.github.io/assets/15076665/a03481ff-0884-41af-86c4-b9a4eb3f22dd)
 
 Phía client yêu cầu hiển thị `1,000` thay vì `1000` thì nhiệm vụ convert format cho dữ liệu sẽ là nhiệm vụ của tầng presentation.
 
