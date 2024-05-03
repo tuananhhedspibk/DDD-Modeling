@@ -80,7 +80,7 @@ Lúc này `address` sẽ được coi như một value-object và được xem n
 
 Và thế là khi tạo `address` ta cần truyền thêm cả `userID` vào ??? Đây là một điều rất kì lạ phải không.
 
-![File_000](https://user-images.githubusercontent.com/15076665/178129256-286fc06b-38e8-419e-b288-e118bf8b8c14.png)
+![Screenshot 2024-05-03 at 10 58 54](https://github.com/tuananhhedspibk/tuananhhedspibk.github.io/assets/15076665/e2af7dc1-6257-4e21-a9ba-c149cd616c2e)
 
 Ví dụ trên đây là điển hình cho việc phát sinh các ràng buộc giữa object và table.
 
