@@ -20,7 +20,7 @@ Rất đơn giản, đó là sử dụng CQRS. Về cơ bản CQRS là:
 
 Ở trong ngữ cảnh của DDD thì nó là model class. Nói đơn giản đó là tạo ra các classes dùng riêng cho tham chiếu cũng như cập nhật dữ liệu
 
-![File_000 (1)](https://user-images.githubusercontent.com/15076665/177655223-a2df7239-b4ae-40b8-a1da-3749a08ee016.png)
+![Screenshot 2024-05-03 at 10 29 41](https://github.com/tuananhhedspibk/tuananhhedspibk.github.io/assets/15076665/8d7b63d9-c513-43cb-90ce-25f6e81b22d6)
 
 Write-Model sẽ sử dụng `domain object` (`entity`, `value-object`)
 Read-model sẽ định nghĩa một kiểu model dùng riêng cho use-case liên quan đến nghiệp vụ truy vấn dữ liệu. Ngoài ra cũng cần định nghĩa một service sử dụng model đó
@@ -52,7 +52,7 @@ QueryService ở tầng use-case sẽ `nhận điều kiện A` và `trả về 
 
 Còn class implement ở tầng infra sẽ cho thấy `cách lấy dữ liệu cụ thể là như thế nào` - How.
 
-![File_000](https://user-images.githubusercontent.com/15076665/178090177-6489e9b4-fb49-42ca-85b4-3da7af8330fd.png)
+![Screenshot 2024-05-03 at 10 36 24](https://github.com/tuananhhedspibk/tuananhhedspibk.github.io/assets/15076665/c40f64c9-282d-405d-b931-a7dbeaf4e8e5)
 
 Với RDB, ở tầng infra khi tiến hành thực hiện việc lấy dữ liệu ra từ DB ta có thể tiến hành `JOIN` các bảng lại với nhau, chỉ `SELECT` những cột cần thiết → tối ưu hoá về mặt hiệu năng
 
@@ -99,7 +99,7 @@ Thì sau khi viết test cho `xử lí write` xong, ta cũng cần phải tiếp
 
 Đầu tiên đó là **Phân chia data source**
 
-![File_000 (1)](https://user-images.githubusercontent.com/15076665/178091715-4bfc4421-5aa6-4348-a36b-5debdcc0db39.png)
+![Screenshot 2024-05-03 at 10 30 57](https://github.com/tuananhhedspibk/tuananhhedspibk.github.io/assets/15076665/d7b202ed-9369-42c4-949d-7d6e87d2835b)
 
 Nhiều người nghĩ rằng `CQRS đồng nghĩa với việc phân chia data source` - đây là một suy nghĩ hoàn toàn sai lầm. Việc phân chia data source chỉ là bước tiếp theo sau khi tiến hành phân chia model mà thôi.
 
